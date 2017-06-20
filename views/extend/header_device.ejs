@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title%></title>
+  <%- include include_style.ejs %>
+
+</head>
+
+<body>
+  <div id="wrapper">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <% if(co == 'gemteks'){ %>
+                <a class="navbar-brand" href="/tools">Device admin</a>
+                <% } %>
+
+            </div>
+
+        </nav>
+           <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+          <div class="sidebar-collapse">
+              <ul class="nav" id="main-menu">
+                  <li  >
+                      <% if(title ==='Device'){ %>
+                        <a class="active-menu"  href="/">
+                      <% }else{ %>
+                        <a href="/">
+                      <% } %>
+                        <i class="fa fa-table fa-3x"></i>
+                        <label class="fa fa-2x" style="color:#ffffff">Device</label>
+                      </a>
+                  </li>
+              </ul>
+
+          </div>
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+          <div id="page-inner">
+             <div class="row">
+
+                <div class="col-md-12">
+                  <div >
+                      <button type="button" id="back" name="back" class="btn btn-primary btn-sm" onClick="back()">
+                            <img src="/icons/back.png" width="ˇ30" height="30"/> Back
+                        </button>
+                        <% if(co == 'blazing'){ %>
+                          <img src="/icons/Logo1n.png" class="center-block logoStyle"/>
+                        <% } %>
+                        &nbsp<br>
+                </div>
+
+                <div  class="col-md-6" style="margin-top: -10px;">
+
+                    <h2>Mac:<%= mac%></h2>
+                </div>
+                <div class="col-md-6" >
+
+                    <!--<input id="chartBtn" type ="button" onclick="changeChartDisplay();" value="Show Chart"></input>-->
+                </div>
+
+                    <div class="easyui-tabs" style="width:99%;height:370px">
+                      <div title="PH" style="padding:10px">
+                        <div id="imgChart1"></div>
+                      </div>
+                      <div title="DO" style="padding:10px">
+                        <div id="imgChart2"></div>
+                      </div>
+                      <div title="COND" style="padding:10px">
+                        <div id="imgChart3"></div>
+                      </div>
+                      <div title="Temperature" style="padding:10px">
+                        <div id="imgChart4"></div>
+                      </div>
+                      <div title="NTU" style="padding:10px">
+                        <div id="imgChart5"></div>
+                      </div>
+                      <div title="Voltage" style="padding:10px">
+                        <div id="imgChart6"></div>
+                      </div>
+                    </div>
+
+
+              <hr>
+
+
+
+                <div class="col-md-12">
