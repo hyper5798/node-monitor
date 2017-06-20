@@ -2,18 +2,19 @@ var aa00Data = { 'temperature':[6,10,100], 'humidity':[10,14,100], 'voltage':[14
 var aa01Data = { 'pressure':[6,10,1],'hight':[10,14,1],'temperature':[14,16,1], 'humidity':[16,18,1], 'light':[18,22,1] };
 var aa02Data = {'uv':[6,10,1],'rain':[10,14,1]};
 var aa10Data = {'ph':[6,10,100],'do':[10,14,100],'cond':[14,20,1000],'temperature':[20,24,100],'ntu':[24,28,100],'voltage':[28,32,1]};
+var aa20Data = {'soil_temperature':[6,10,100],'soil_water':[10,14,100],'co2':[14,18,1],'lux':[18,22,1],'voltage':[22,26,1]};
 
-exports.getInformation = function (data) { 
-    
+exports.getInformation = function (data) {
+
     var type = data.substring(0,4);
-    
+
     return getTypeData(data,type);
 
 };
 
 function getTypeData(data,type){
     var info = {};
-    
+
     if(type==='aa00'){
         var obj = aa00Data;
     }else if(type==='aa01'){
@@ -22,6 +23,10 @@ function getTypeData(data,type){
         var obj = aa02Data;
     }else if(type==='aa10'){
         var obj = aa10Data;
+    }else if(type==='aa20'){
+        var obj = aa20Data;
+    }else{
+        return null;
     }
     var keys = Object.keys(obj);
     var count = keys.length;

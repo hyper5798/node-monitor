@@ -17,8 +17,8 @@ var flash = require('connect-flash');
 //Jason add on 2017.02.16 - end
 var app = express();
 
-var port = process.env.PORT || 3006;
-console.log('Server listen port :'+port);
+var port = process.env.PORT || 3001;
+console.log('Node monitor server listen port :'+port);
 app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

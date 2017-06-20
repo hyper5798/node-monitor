@@ -30,92 +30,7 @@ var options1 ={
                     }
                 }
             };
-var options2 ={
-                title: "DO",
-                axes:
-                {
-                    xaxis: {
-                        numberTicks: 24,
-                        renderer:$.jqplot.DateAxisRenderer,
-                        tickOptions:{formatString:'%H:%M'}
-                    },
-                    yaxis: {
-                        numberTicks: 10
-                    }
-                }
-            };
-var options2 ={
-                title: "DO",
-                axes:
-                {
-                    xaxis: {
-                        numberTicks: 24,
-                        renderer:$.jqplot.DateAxisRenderer,
-                        tickOptions:{formatString:'%H:%M'}
-                    },
-                    yaxis: {
-                        numberTicks: 10
-                    }
-                }
-            };
-var options3 ={
-                title: "COND",
-                axes:
-                {
-                    xaxis: {
-                        numberTicks: 24,
-                        renderer:$.jqplot.DateAxisRenderer,
-                        tickOptions:{formatString:'%H:%M'}
-                    },
-                    yaxis: {
-                        numberTicks: 10
-                    }
-                }
-            };
 
-var options4 ={
-                title: "Temperature",
-                axes:
-                {
-                    xaxis: {
-                        numberTicks: 24,
-                        renderer:$.jqplot.DateAxisRenderer,
-                        tickOptions:{formatString:'%H:%M'}
-                    },
-                    yaxis: {
-                        numberTicks: 10
-                    }
-                }
-            };
-var options5 ={
-                title: "NTU",
-                axes:
-                {
-                    xaxis: {
-                        numberTicks: 24,
-                        renderer:$.jqplot.DateAxisRenderer,
-                        tickOptions:{formatString:'%H:%M'}
-                    },
-                    yaxis: {
-                        numberTicks: 10
-                    }
-                }
-            };
-
-var options6 ={
-                title: "Voltage",
-                axes:
-                {
-                    xaxis: {
-                        numberTicks: 24,
-                        renderer:$.jqplot.DateAxisRenderer,
-                        tickOptions:{formatString:'%H:%M'}
-                    },
-                    yaxis: {
-                        numberTicks: 10
-                    }
-                }
-            };
 
 if(location.protocol=="https:"){
   var wsUri="wss://"+host+":"+port+"/ws/devices";
@@ -146,7 +61,8 @@ function wsConn() {
               table.fnAddData(data);
           }
           waitingDialog.hide();
-          showChart(data);
+          //Jason mark chart function
+          //showChart(data);
       }
     }
   }
@@ -266,25 +182,20 @@ function showChart(data){
     }
 
     options1.axes.xaxis.numberTicks = x_number;
-    options2.axes.xaxis.numberTicks = x_number;
-    options3.axes.xaxis.numberTicks = x_number;
-    options4.axes.xaxis.numberTicks = x_number;
-    options5.axes.xaxis.numberTicks = x_number;
-    options6.axes.xaxis.numberTicks = x_number;
     options1.axes.xaxis.tickOptions.formatString = formatStr;
-    options2.axes.xaxis.tickOptions.formatString = formatStr;
-    options3.axes.xaxis.tickOptions.formatString = formatStr;
-    options4.axes.xaxis.tickOptions.formatString = formatStr;
-    options5.axes.xaxis.tickOptions.formatString = formatStr;
-    options6.axes.xaxis.tickOptions.formatString = formatStr;
     //Jason add for chart to image on 2017.06.12
-
+    options1.title = 'PH';
     plot1 = $.jqplot ('chartPH', [phList],options1);
-    plot2 = $.jqplot ('chartDO', [doList],options2);
-    plot3 = $.jqplot ('chartCOND', [condList],options3);
-    plot4 = $.jqplot ('chartTmp', [tempList],options4);
-    plot5 = $.jqplot ('chartNTU', [ntuList],options5);
-    plot6 = $.jqplot ('chartVol', [volList],options6);
+    options1.title = 'DO';
+    plot2 = $.jqplot ('chartDO', [doList],options1);
+    options1.title = 'COND';
+    plot3 = $.jqplot ('chartCOND', [condList],options1);
+    options1.title = 'Temperature';
+    plot4 = $.jqplot ('chartTmp', [tempList],options1);
+    options1.title = 'NTU';
+    plot5 = $.jqplot ('chartNTU', [ntuList],options1);
+    options1.title = 'Voltage';
+    plot6 = $.jqplot ('chartVol', [volList],options1);
     var imgPHData = $('#chartPH').jqplotToImageStr({});
     var imgPHElem = $('<img/>').attr('src',imgPHData);
     $('#imgChart1').append(imgPHElem);

@@ -31,19 +31,12 @@ router.route('/devices')
 		var mac    = req.query.mac;
 		var option = req.query.option;
 		var mdate  = req.query.mdate;
-		var gwId     = req.query.gwId;
 		var selectObj = JsonFileTools.getJsonFromFile(selectPath);
 		selectObj.option = Number(option);
 		selectObj.date = mdate;
 		JsonFileTools.saveJsonToFile(selectPath,selectObj);
 		if(mac){
-			DeviceDbTools.findDevicesByDate(mdate,mac,Number(option),'asc',function(err,devices){
-			    if (err)
-					return res.send(err);
-				return res.json(devices);
-			});
-		}else if(gwId){
-			DeviceDbTools.findDevicesByGWID(mdate,gwId,Number(option),'asc',function(err,devices){
+			DeviceDbTools.findDevicesByDate(mdate,mac,Number(option),function(err,devices){
 			    if (err)
 					return res.send(err);
 				return res.json(devices);

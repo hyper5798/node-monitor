@@ -134,21 +134,21 @@ exports.findLastDevice = function (json,calllback) {
 /*Find devices by date
 *date option: 0:one days 1:one weeks 2:one months 3:three months
 */
-exports.findDevicesByDate = function (dateStr,mac,dateOption,order,calllback) {
+exports.findDevicesByDate = function (dateStr,mac,dateOption,calllback) {
     
     var json = {macAddr:mac};
-    return toFindDevice(dateStr,json,dateOption,order,calllback);
+    return toFindDevice(dateStr,json,dateOption,calllback);
    
 };
 
-exports.findDevicesByGWID = function (dateStr,gwid,dateOption,order,calllback) {
+exports.findDevicesByGWID = function (dateStr,gwid,dateOption,calllback) {
     
     var json = {"extra.gwid":gwid};
-    return toFindDevice(dateStr,json,dateOption,order,calllback);
+    return toFindDevice(dateStr,json,dateOption,calllback);
    
 };
 
-function toFindDevice(dateStr,json,dateOption,order,calllback) {
+function toFindDevice(dateStr,json,dateOption,calllback) {
     console.log(moment().format('YYYY-MM-DD HH:mm:ss')+' Debug : findDevicesByDate()');
     console.log(JSON.stringify(json));
     testDate = moment(dateStr,'YYYY/MM/DD').add(1,'days').toDate();
@@ -177,14 +177,8 @@ function toFindDevice(dateStr,json,dateOption,order,calllback) {
     
     json.recv = {$gte:from, $lt:to};
 
-    var recvOrder = -1;
-    if(order === 'asc'){
-        recvOrder = 1;
-    }
-
-    DeviceModel.find(json).sort({ recv:recvOrder}).exec(function(err, Devices){
+    DeviceModel.find(json).exec(function(err, Devices){
        
-
         if (err) {
             console.log('Debug : findDevice err:', err);
             return calllback(err);

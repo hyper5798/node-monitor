@@ -85,14 +85,14 @@ exports.parseMsg = function (msg) {
 
 
     //Parse data
-    if(mExtra.fport>0 ){
-        mInfo = parseBlazingMessage(mData,mExtra.fport);
-    }else{
-        if(isSameTagCheck(mType,mMac,msg.recv))
+    if(isSameTagCheck(mType,mMac,msg.recv))
             return null;
-        if(mType.indexOf('aa')!=-1)
-            mInfo = parseDefineMessage(mData,mType);
+    if(mType.indexOf('aa')!=-1){
+         mInfo = parseDefineMessage(mData,mType);
+    }else{
+        return null;
     }
+       
 
     var msg = {mac:mMac,data:mData,recv:mRecv,date:mDate,extra:mExtra,timestamp:mTimestamp};
     if(mExtra.fport>0 ){
@@ -143,12 +143,6 @@ exports.getGwIdByMac = function (mac) {
 
 exports.getDevicesData = function (type,devices) {
     var array = [];
-    if(isNeedGWMac){
-        //For blazing
-        if(gwIdMacMapList === undefined || gwIdMacMapList === null){
-            initMap();
-        }
-    }
 
     if(devices){
         for (var i=0;i<devices.length;i++)
@@ -170,16 +164,14 @@ exports.getDevicesData = function (type,devices) {
 function getDevicesArray(obj,item,type){
 
     var arr = [];
+    var keys = Object.keys(obj.info);
 
     arr.push(item);
     arr.push(obj.date);
     arr.push(obj.data);
-    arr.push(obj.info.ph);
-    arr.push(obj.info.do);
-    arr.push(obj.info.cond);
-    arr.push(obj.info.temperature);
-    arr.push(obj.info.ntu);
-    arr.push(obj.info.voltage);
+    for(i in keys){
+        arr.push(obj.info[keys[i]]);
+    }
 
     return arr;
 }
